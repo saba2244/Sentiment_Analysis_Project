@@ -81,6 +81,8 @@ class HashTable
     return: node with "key" as it's data if found, otherwise NULL
   	*/
     node *searchItem(string key);
+
+    void printResult(int viable, int score);
 };
 
 #endif
