@@ -2,6 +2,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import csv
 
+#Python script uses matplotlib to create a graph of the moving overall score as text is interpreted.
+#The script is called from within the c++ driver program. 
+
 Y = []
 X = []
 with open('TimeArray.csv') as f:
