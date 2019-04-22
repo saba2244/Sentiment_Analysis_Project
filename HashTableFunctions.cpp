@@ -147,46 +147,38 @@ void HashTable::printResult(int score, int viable)
 
   switch (bucket) {
     case 0:
-      result = "As a whole this text file is excessively negative in tone. The entire text is almost devoid of any positivity.";
+      cout << "As a whole this text file is excessively negative in tone. The entire text is almost devoid of any positivity.";
       break;
     case 1:
-      result = "As a whole the tone of the text is extremely negative. Any positivity is constrained to sparse sentences or paragraphs, depending upon the length of the text.";
+      cout << "As a whole the tone of the text is extremely negative. Any positivity is constrained to sparse sentences or paragraphs, depending upon the length of the text.";
       break;
     case 2:
-      result = "Overall the text contains a very negative tone. Certain paragraphs, chapters, or sections may express positivity";
+      cout << "Overall the text contains a very negative tone. Certain paragraphs, chapters, or sections may express positivity";
       break;
     case 3:
-      result = "Overall the text is moderately negative in tone. Positive expression is more difficult to find but still present.";
+      cout << "Overall the text is moderately negative in tone. Positive expression is more difficult to find but still present.";
       break;
     case 4:
-      result = "The text as a whole is relatively neutral in tone. While negative aspects are slightly more prevalent, both moods are noticable.";
+      cout << "The text as a whole is relatively neutral in tone. While negative aspects are slightly more prevalent, both moods are noticable.";
       break;
     case 5:
-      result = "The text as a whole is relatively neutral in tone. While positive aspects are slightly more prevalent, both moods are noticable.";
+      cout << "The text as a whole is relatively neutral in tone. While positive aspects are slightly more prevalent, both moods are noticable.";
       break;
     case 6:
-      result = "Overall the text is moderately positive in tone. Negative expression is more difficult to find but still present.";
+      cout << "Overall the text is moderately positive in tone. Negative expression is more difficult to find but still present.";
       break;
     case 7:
-      result = "Overall the tone of this text is very positive. Certain paragraphs, chapters, or sections may contain negative expressions.";
+      cout << "Overall the tone of this text is very positive. Certain paragraphs, chapters, or sections may contain negative expressions.";
       break;
     case 8:
-      result = "As a whole the tone of the text is extremely positive. Any negativity is constrained to sparse sentences or paragraphs, depending upon the length of the text.";
+      cout << "As a whole the tone of the text is extremely positive. Any negativity is constrained to sparse sentences or paragraphs, depending upon the length of the text.";
       break;
     case 9:
-      result = "As a whole this text file is excessively positive in tone. The entire text is almost devoid of any positivity.";
+      cout << "As a whole this text file is excessively positive in tone. The entire text is almost devoid of any positivity.";
       break;
   }
 
   if(viable < 40)
-    note = "Please note that the text was not long enough for the conclusions above to be considered accurate and they should be treated as such. For greater accuracy try a longer text file.";
-
-  ofstream myfile;
-  myfile.open("output.txt");
-  myfile << "Overall Score: " << score<< endl;
-  myfile << "Analysis: " << endl;
-  myfile <<result<<endl << endl << note;
-  myfile.close();
-
+    cout << endl << endl <<  "Please note that the text was not long enough for the conclusions above to be considered accurate and they should be treated as such. For greater accuracy try a longer text file.";
 
 }
