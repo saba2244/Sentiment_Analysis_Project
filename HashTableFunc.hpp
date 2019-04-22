@@ -82,7 +82,7 @@ class HashTable
   	*/
     node *searchItem(string key);
 
-    void printResult(int viable, int score);
+    void printResult(float viable, float score);
 };
 
 #endif
