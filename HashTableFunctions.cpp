@@ -7,12 +7,14 @@
 
 using namespace std;
 
+//Creates a new node 
 node *HashTable::createNode(string key)
 {
     node *nw = new node;
     nw->word = key;
     return nw;
 }
+//Constructor to initialize hashtable with given number of buckets
 HashTable::HashTable(int bsize)
 {
     this->tableSize = bsize;
@@ -20,7 +22,7 @@ HashTable::HashTable(int bsize)
     for (int i = 0; i < bsize; i++)
         hashTable[i] = nullptr;
 }
-
+//Destructor
 HashTable::~HashTable()
 {
     node *temp;
@@ -37,6 +39,7 @@ HashTable::~HashTable()
         hashTable[i] = NULL;
     }
 }
+//Inserts a positive word into the hashtable using the hashFunction
 bool HashTable::insertPos(string key)
 {
     if (searchItem(key) != nullptr)
@@ -53,6 +56,7 @@ bool HashTable::insertPos(string key)
     hashTable[index] = newNode;
     return true;
 }
+//Utility function to insert any string into a hashtable
 bool HashTable::insertItem(string key)
 {
     if (searchItem(key) != nullptr)
@@ -68,6 +72,7 @@ bool HashTable::insertItem(string key)
     hashTable[index] = newNode;
     return true;
 }
+//Inserts negative word in hashtable
 bool HashTable::insertNeg(string key)
 {
     if (searchItem(key) != nullptr)
@@ -84,6 +89,7 @@ bool HashTable::insertNeg(string key)
     hashTable[index] = newNode;
     return true;
 }
+//DJB2 hashing function for strings
 unsigned int HashTable::hashFunction(string key)
 {
     unsigned int hashValue = 5381;
@@ -95,6 +101,7 @@ unsigned int HashTable::hashFunction(string key)
     hashValue %= tableSize;
     return hashValue;
 }
+//Utility function to print a hashtable
 void HashTable::printTable()
 {
     for (int i = 0; i < tableSize; i++)
@@ -115,7 +122,7 @@ void HashTable::printTable()
         cout << endl;
     }
 }
-
+//Searches for a word in hashtable with the given name
 node *HashTable::searchItem(string key)
 {
     int index = hashFunction(key);
@@ -137,7 +144,7 @@ node *HashTable::searchItem(string key)
         return nullptr;
     }
 }
-
+//Prints the result of the sentiment analysis based on the overall score and size of document scanned.
 void HashTable::printResult(float score, float viable)
 {
   cout << "Overall Score: " << score << endl;
