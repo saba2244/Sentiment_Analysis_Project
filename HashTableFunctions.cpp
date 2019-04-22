@@ -138,7 +138,7 @@ node *HashTable::searchItem(string key)
     }
 }
 
-void HashTable::printResult(int score, int viable)
+void HashTable::printResult(float score, float viable)
 {
   cout << "Overall Score: " << score << endl;
   cout << "Analysis:" << endl;
