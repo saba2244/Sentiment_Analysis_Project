@@ -60,6 +60,7 @@ int main(int argc, char* argv[])
 			total++;
 			//Trailing average mode
 			if(counter > 0){
+				counter--;
 				if(posT.searchItem(temp) != nullptr)
 				{
 					score--;
