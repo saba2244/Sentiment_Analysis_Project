@@ -6,6 +6,9 @@ import re
 import string
 from bs4 import BeautifulSoup
 
+#Python webscraper program that allows user to input a url or text document for analysis.
+#Script cleans the text, then sends it to c++ program for analysis.
+
 # Menu for User
 decision = "0"
 while(decision != "4"):
