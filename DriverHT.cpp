@@ -53,22 +53,50 @@ int main(int argc, char* argv[])
 		inStream3.open(argv[3]);
 
 		int score = 0;
+		int counter;
 		vector<int> score_array;
 		while(inStream3 >> temp)
 		{
 			total++;
-			//Check if temp is positive or negative, then add score and add word to graph.
-			if(posT.searchItem(temp) != nullptr)
-			{
-				score++;
-				subtotal++;
-				score_array.push_back(score);
+			//Trailing average mode
+			if(counter > 0){
+				counter--;
+				if(posT.searchItem(temp) != nullptr)
+				{
+					score--;
+					subtotal++;
+					score_array.push_back(score);
+				}
+				else if(negT.searchItem(temp) != nullptr)
+				{
+					score++;
+					subtotal++;
+					score_array.push_back(score);
+				}
+				else{
+					score_array.push_back(0);
+				}
 			}
-			else if(negT.searchItem(temp) != nullptr)
-			{
-				score--;
-				subtotal++;
-				score_array.push_back(score);
+			//Check if temp is positive or negative, then add score and add word to graph.
+			else{
+				if(temp == "not" || temp == "never"){
+					counter = 3;
+				}
+				if(posT.searchItem(temp) != nullptr)
+				{
+					score++;
+					subtotal++;
+					score_array.push_back(score);
+				}
+				else if(negT.searchItem(temp) != nullptr)
+				{
+					score--;
+					subtotal++;
+					score_array.push_back(score);
+				}
+				else{
+					score_array.push_back(0);
+				}
 			}
 		}
 		for(int i = 0; i < score_array.size(); i++)
