@@ -79,6 +79,8 @@ int main(int argc, char* argv[])
 		cout << "Test: " << 50*(score/total+1) << endl;
 		cout << "Test 2: " << 50*(score/subtotal+1) << endl;
 		cout << "Final score is: " << score << endl;
+		
+		printResult(score,total);
 		return 0;
 	}
 }
