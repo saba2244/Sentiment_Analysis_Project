@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
 
 	int score = 0;
 	vector<int> score_array;
-	while(getline(inStream3,temp,' '))
+	while(inStream3 >> temp)
 	{
 		total++;
 		//Check if temp is positive or negative, then add score and add word to graph.
