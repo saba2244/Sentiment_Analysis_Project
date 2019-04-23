@@ -20,7 +20,6 @@ int main(int argc, char* argv[])
 	//Declare Tables and temp
 	HashTable posT(1000);
 	HashTable negT(2000);
-	HashTable words(500);
 	string temp;
 
 	ifstream inStream;
@@ -72,12 +71,13 @@ int main(int argc, char* argv[])
 	{
 		cout << score_array[i] << endl;;
 	}
-	// Writing vector to a word file, import into Python, and then graph it over time.
-	cout << "Test: " << 50*(score/total+1) << endl;
-	cout << "Test 2: " << 50*(score/subtotal+1) << endl;
+	cout << "Percentage of good words: " << 50*(score/subtotal+1) << "%" << endl;
 	cout << "Final score is: " << score << endl;
 
 	printResult(score,total);
+	if(time_score_array.size() > 50)
+		system("py GraphingTimeSeries.py");
+	
 	return 0;
 }
 // Copyright 2019 Brandon Finley
