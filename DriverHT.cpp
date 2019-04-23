@@ -6,7 +6,19 @@
 #include "HashTableFunc.hpp"
 
 using namespace std;
-//Main function reads in positive and negative words as well as the input file from python and performs sentiment analysis on it.
+
+float tempProcess(string temp){
+	//flipping words
+	if(temp == "badly"||temp == "nearly"||temp == "terribly"||temp == "not"||temp == "never"){
+		return -1;
+	}
+	//increasing words
+	if(temp == "absolutely"||temp == "awfully"||temp == "completely"||temp == "deeply"||temp == "enormously"||temp == "entirely"||temp == "extremely"||temp == "fairly"||temp == "fully"||temp == "greatly"||temp == "highly"||temp == "incredibly"||temp == "intensely"||temp == "lots"||temp == "most"||temp == "much"||temp == "perfectly"||temp == "positively"||temp == "pretty"||temp == "purely"||temp == "quite"||temp == "rather"||temp == "really"||temp == "so"||temp == "strongly"||temp == "thoroughly"||temp == "too"||temp == "totally"||temp == "very"||temp == "well"||temp == "always"||temp == "constantly"||temp == "frequently"||temp == "generally"||temp == "often"||temp == "regularly"||temp == "usually"){
+		return 2;
+	}
+	return 1;
+}
+
 int main(int argc, char* argv[])
 {
 	float total = 0;
@@ -16,69 +28,77 @@ int main(int argc, char* argv[])
 		cout << "Not enough command line arguments (3)!" << endl;
 		return -1;
 	}
-	
-	//Declare Tables and temp
-	HashTable posT(1000);
-	HashTable negT(2000);
-	HashTable words(500);
-	string temp;
-
-	ifstream inStream;
-	inStream.open(argv[1]);
-
-	//Import Pos Words
-	while(!inStream.eof())
+	else
 	{
-		getline(inStream, temp, '\n');
-		posT.insertPos(temp);
-	}
-	inStream.close();
+		//Declare Tables and temp
+		HashTable posT(1000);
+		HashTable negT(2000);
+		HashTable words(500);
+		string temp;
 
-	ifstream inStream2;
-	inStream2.open(argv[2]);
+		ifstream inStream;
+		inStream.open(argv[1]);
 
-	//Import Neg Words
-	while (!inStream2.eof())
-	{
-		getline(inStream2, temp, '\n');
-		negT.insertNeg(temp);
-	}
-	inStream2.close();
-
-	//Import file Document
-	ifstream inStream3;
-	inStream3.open(argv[3]);
-
-	int score = 0;
-	vector<int> score_array;
-	while(inStream3 >> temp)
-	{
-		total++;
-		//Check if temp is positive or negative, then add score and add word to graph.
-		if(posT.searchItem(temp) != nullptr)
+		//Import Pos Words
+		while(!inStream.eof())
 		{
-			score++;
-			subtotal++;
-			score_array.push_back(score);
+			getline(inStream, temp, '\n');
+			posT.insertPos(temp);
 		}
-		else if(negT.searchItem(temp) != nullptr)
-		{
-			score--;
-			subtotal++;
-			score_array.push_back(score);
-		}
-	}
-	for(int i = 0; i < score_array.size(); i++)
-	{
-		cout << score_array[i] << endl;;
-	}
-	// Writing vector to a word file, import into Python, and then graph it over time.
-	cout << "Test: " << 50*(score/total+1) << endl;
-	cout << "Test 2: " << 50*(score/subtotal+1) << endl;
-	cout << "Final score is: " << score << endl;
+		// posT.printTable();
+		inStream.close();
 
-	printResult(score,total);
-	return 0;
+		ifstream inStream2;
+		inStream2.open(argv[2]);
+
+		//Import Neg Words
+		while (!inStream2.eof())
+		{
+			getline(inStream2, temp, '\n');
+			negT.insertNeg(temp);
+		}
+		// negT.printTable();
+		inStream2.close();
+
+		//Import Document
+		ifstream inStream3;
+		inStream3.open(argv[3]);
+
+		int score = 0;
+		int mult1 = 1;
+		int mult2 = 1;
+		int mult3 = 1;
+
+		vector<int> score_array;
+		while(inStream3 >> temp)
+		{
+			total++;
+			if(posT.searchItem(temp) != nullptr)
+			{
+				score = score + mult1*mult2*mult3;
+				subtotal++;
+				score_array.push_back(score);
+			}
+			else if(negT.searchItem(temp) != nullptr)
+			{
+				score = score - mult1*mult2*mult3;
+				subtotal++;
+				score_array.push_back(score);
+			}
+			mult1 = mult2;
+			mult2 = mult3;
+			mult3 = tempProcess(temp);
+		}
+		for(unsigned int i = 0; i < score_array.size(); i++)
+		{
+			cout << score_array[i] << endl;
+		}
+		// Writing vector to a word file, import into Python, and then graph it over time.
+		cout << "Test: " << 50*(score/total+1) << endl;
+		cout << "Test 2: " << 50*(score/subtotal+1) << endl;
+		cout << "Final score is: " << score << endl;
+		return 0;
+	}
 }
 // Copyright 2019 Brandon Finley
 //     Licensed under the Apache License,
